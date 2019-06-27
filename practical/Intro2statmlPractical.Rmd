@@ -166,3 +166,127 @@ tt = with(PlantGrowth,
                  var.equal = TRUE))
 tt
 ```
+
+### Optional: Permtutation test example
+We briefly talked about permutation tests in the lecture. Here is an example of a permutation
+test. We determine a null distribution of the statistic by random permutation of the group labels.
+
+```{r, cache = TRUE}
+abs_t_null = with(
+  dplyr::filter(PlantGrowth, group %in% c("ctrl", "trt2")),
+    replicate(10000,
+      abs(t.test(weight ~ sample(group))$statistic)))
+```
+
+Question
+
+15) Why did we use the absolute value function (abs) in the above code?
+
+
+```{r,}
+ggplot(tibble(`|t|` = abs_t_null), aes(x = `|t|`)) +
+  geom_histogram(binwidth = 0.1, boundary = 0) + theme_minimal() + 
+  geom_vline(xintercept = abs(tt$statistic), col = "red")
+```
+
+The following computes the p-value.
+
+```{r,}
+mean(abs(tt$statistic) <= abs_t_null)
+
+```
+Question
+
+16) Check by writing some code that this value is the same as the rank of the t statistic divided by the number of permutations.
+
+17) Compare the p-value with the one computed using the t-test
+
+
+# Linear Models
+
+This section discusses linear models. There are many different software packages to work with in R, we will start with some simple examples.
+
+
+Load libraries require for this section.
+```{r,}
+library(MASS)
+library(ISLR)
+```
+We load the boston housing market dataset, which includes data on the house price
+values in different neighbourhoods in Boston
+
+```{r,}
+data(Boston) # use fix(Boston) to bring up a data editor 
+names(Boston)
+```
+In R, the formula syntax is the following `lm(y~x,data)`. The first part specifies 
+the formula of the model (an intercept is included by default) and then the variables
+to regress on. We create a simple linear model with the median values as a reponse
+and the percent of households with low socioeconomic status (lstat) as a predictor.
+
+```{r,}
+lm.fit <- lm(medv ~ lstat , data = Boston) # You need to tell R what data to use
+```
+
+The output can be looked at using the summary function. Note how t statistics, R^2 and F statistics,
+as well as p-values are all outputed automatically. This makes it very easy to apply all the theory
+we learnt in lectures.
+
+```{r,}
+summary(lm.fit)
+coef(lm.fit) # extract coefficients
+confint(lm.fit) # extract confidence intervals
+```
+Question
+
+18) Take the coefficients and calculate the statistics manually (using code not paper!)
+
+We can predict for new values of `lstat`, along with confidence intervals using `predict`
+```{r,}
+predict (lm.fit ,data.frame(lstat=(c(5,10 ,15))), interval = "confidence")
+```
+
+Let us visualise the results of the linear modelling. What is happening?
+
+```{r,}
+plot(Boston$lstat, Boston$mdev, pch = 19)
+abline (lm.fit ,lwd=3,col ="red")
+```
+
+Plotting the lm object results in a diagnostic plots.
+
+```{r,}
+par(mfrow=c(2,2))
+plot(lm.fit)
+```
+
+## Multiple regression
+
+The synatax `lm(y~x1+x2+x3)` is used for multiple linear regression where we
+are regressing on predictors `x1`, `x2`, `x3` etc. The following example uses lstat
+and age to fit a model
+
+```{r,}
+lm.fit <- lm(medv ~ lstat + age , data = Boston )
+summary(lm.fit)
+
+```
+
+Question
+
+19) Fit at least 5 different linear models using the above synatax? What do you find out?
+
+
+If we want to use all predictors in the data frame we just put a point, as follows.
+
+```{r,}
+lm.fit <- lm(medv~., data = Boston)
+summary (lm.fit)
+```
+
+A minus sign can be use to indicate NOT to use that predictor.
+```{r,}
+lm.fit <- lm(medv ~.-age, data = Boston)
+```
+
+
