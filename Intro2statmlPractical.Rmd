@@ -1,0 +1,168 @@
+---
+title: "Introduction to Statistics and Machine Learning"
+author: "Oliver M. Crook"
+date: "27 June 2019"
+output: html_document
+---
+
+Many of these example have been taken and adapted from 
+
+Modern Statistics for Modern Biology; Susan Holmes and Wolfgang Huber
+
+An Introduction to Statistical Learning; James, Witten, Hastie, Tibshirnani
+
+The Elements to Statistical Learning; Friedman, Tibshirani, Hastie
+
+# Section: Testing
+
+## Is my coin biased?
+
+The following code chunk simualtes 10 coin toss from a biased coin.
+
+```{r,}
+set.seed(2) # sets a random seed
+numFlips = 100
+probHead = 0.59
+coinFlips = sample(c("H", "T"), size = numFlips,
+  replace = TRUE, prob = c(probHead, 1 - probHead))
+head(coinFlips)
+
+```
+If the coin were unbiased we expect roughly 50 heads. Let us see how many heads and tails there are.
+```{r,}
+table(coinFlips)
+```
+
+We calculate the binomial statistic for a number of flips between 0 and 100. This is the binomial density
+for an unbiased coin.
+```{r,}
+library("dplyr")
+k = 0:numFlips
+numHeads = sum(coinFlips == "H")
+binomDensity = tibble(k = k,
+     p = dbinom(k, size = numFlips, prob = 0.5))
+```
+Questions: 
+1) Write some code to check that the probabilties from the binomial statistic sum to $1$.
+
+2) change the prob argument show that the probabilities still some to $1$.
+
+
+The following code chunk plots the binomial statistic and the number of heads observed is marked in blue.
+
+```{r,}
+library("ggplot2")
+ggplot(binomDensity) +
+  geom_bar(aes(x = k, y = p), stat = "identity") +
+  geom_vline(xintercept = numHeads, col = "blue")
+
+```
+
+Question:
+
+3) Change the prob argument above and replot the binomial statistic, what do you notice about how the distribution is centered?
+
+
+Now, we set the size of the reject threshold
+```{r,}
+alpha = 0.05
+```
+
+Question:
+
+4) Without looking below use the arrange function from dplyr to order the probabilities, smallest first.
+
+5) Looking at the output, what is the most unlikely number of heads to observe?
+
+6) Looking at the output, what is the most likely number of heads to observe?
+
+
+
+Solution:
+```{r,}
+orderBinomDenisty <- arrange(binomDensity, p)
+orderBinomDenisty[1,] # most unlikely
+orderBinomDenisty[101,] 
+```
+Question:
+
+7) What does the following code chunk do?
+
+```{r,}
+binomDensity =  arrange(binomDensity, p) %>%
+        mutate(reject = (cumsum(p) <= alpha))
+
+```
+
+
+Let us plot the reject region in red
+```{r,}
+ggplot(binomDensity) +
+  geom_bar(aes(x = k, y = p, fill = reject), stat = "identity") +
+  scale_fill_manual(
+    values = c(`TRUE` = "red", `FALSE` = "darkgrey")) + theme_minimal() + 
+  geom_vline(xintercept = numHeads, col = "blue") +
+  theme(legend.position = "none")
+
+
+```
+
+Questions:
+
+8) Is there evidence that are coin is biased?
+
+9) Change the size of the reject region to a smaller value, what is our conclusion now?
+
+
+The above test already has an easy to use funciton in R:
+```{r,}
+binom.test(x = numHeads, n = numFlips, p = 0.5)
+
+```
+
+## The t-test
+
+The following is some plant growth data with 2 treatments. The alpha parameter below
+has nothing to do with the reject region before. It changes the see-throughness of the
+points to better visualise overlapping points. Have a go at changing it.
+
+```{r,}
+library("ggbeeswarm")
+data("PlantGrowth")
+ggplot(PlantGrowth, aes(y = weight, x = group, col = group, size = 4, alpha = 0.7)) +
+  geom_beeswarm() + theme(legend.position = "none") + theme_minimal()
+```
+
+Let us take a look at the PlantGrowth data
+```{r,}
+head(PlantGrowth)
+```
+
+Question: 
+
+10) Using a t-test, check to see whether the difference in means of the ctrl and treatment 1 are different
+
+
+Solution
+```{r,}
+t.test(PlantGrowth$weight[PlantGrowth$group == "ctrl"], PlantGrowth$weight[PlantGrowth$group == "trt1"], var.equal = TRUE)
+```
+Questions:
+
+11) What is the p-value?
+
+12) Check the degrees of freedom is correct from the formula?
+
+13) How do the assumptions of the t-test match up with the data?
+
+14) Check the arguments of the t.test function? What happens if you change the equal variance assumption?
+
+You may find the following code useful.
+
+```{r,}
+tt = with(PlantGrowth,
+          t.test(weight[group =="ctrl"],
+                 weight[group =="trt2"],
+                 var.equal = TRUE))
+tt
+```
