@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.18)  27 JUN 2019 10:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.18)  27 JUN 2019 11:15
 entering extended mode
-**./document.tex
-(document.tex
+**./Intro2statsml.tex
+(Intro2statsml.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 75 language(s) loaded.
 (bredelebeamer.cls
@@ -1333,8 +1333,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 )
 \@float@every@algorithm=\toks62
 \c@algorithm=\count194
-) (document.aux)
-\openout1 = `document.aux'.
+) (Intro2statsml.aux)
+\openout1 = `Intro2statsml.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
 LaTeX Font Info:    ... okay on input line 48.
@@ -1431,9 +1431,9 @@ LaTeX Info: Redefining \ref on input line 48.
 LaTeX Info: Redefining \pageref on input line 48.
 LaTeX Info: Redefining \nameref on input line 48.
 
-(document.out) (document.out)
+(Intro2statsml.out) (Intro2statsml.out)
 \@outlinefile=\write7
-\openout7 = `document.out'.
+\openout7 = `Intro2statsml.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 48.
@@ -1540,7 +1540,8 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
- (document.nav)
+
+(Intro2statsml.nav)
 Overfull \hbox (1.38435pt too wide) in paragraph at lines 48--48
 [][]  
  []
@@ -1567,7 +1568,7 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 
 [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
 
-] (document.toc)
+] (Intro2statsml.toc)
 Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 [][] 
  []
@@ -2292,30 +2293,30 @@ Overfull \hbox (1.38435pt too wide) has occurred while \output is active
 
 ]
 \tf@nav=\write8
-\openout8 = `document.nav'.
+\openout8 = `Intro2statsml.nav'.
 
 \tf@toc=\write9
-\openout9 = `document.toc'.
+\openout9 = `Intro2statsml.toc'.
 
 \tf@snm=\write10
-\openout10 = `document.snm'.
+\openout10 = `Intro2statsml.snm'.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 991.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 991.
- (document.aux)
+ (Intro2statsml.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 991.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 991.
-Package rerunfilecheck Info: File `document.out' has not changed.
+Package rerunfilecheck Info: File `Intro2statsml.out' has not changed.
 (rerunfilecheck)             Checksum: 8A5C7456B866AF5B732059AED5D1B60D;307.
  ) 
 Here is how much of TeX's memory you used:
- 28450 strings out of 493323
- 558183 string characters out of 3139066
- 692670 words of memory out of 3000000
+ 28451 strings out of 493323
+ 558281 string characters out of 3139066
+ 692710 words of memory out of 3000000
  31184 multiletter control sequences out of 15000+200000
  64792 words of font info for 92 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,16n,85p,798b,739s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,16n,85p,803b,739s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Program Files/MiKTeX
  2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Program Files/MiKTeX 2.9
@@ -2329,7 +2330,7 @@ ogram Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files/Mi
 KTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/he
 lvetic/uhvro8a.pfb>
-Output written on document.pdf (68 pages, 2714686 bytes).
+Output written on Intro2statsml.pdf (68 pages, 2714683 bytes).
 PDF statistics:
  1162 PDF objects out of 1200 (max. 8388607)
  143 named destinations out of 1000 (max. 500000)

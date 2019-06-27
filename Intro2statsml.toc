@@ -1,0 +1,7 @@
+\select@language {french}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Hypothesis Testing}{5}{0}{2}
+\beamer@sectionintoc {3}{Linear models}{30}{0}{3}
+\beamer@sectionintoc {4}{Dimensionality Reduction}{46}{0}{4}
+\beamer@sectionintoc {5}{Classification}{53}{0}{5}
+\beamer@sectionintoc {6}{Clustering}{61}{0}{6}

@@ -133,7 +133,7 @@ P(K = k|n, p) = {n \choose k}p^k(1-p)^{n - k}
 
 \end{frame}
 
-\begin{frame}{the reject region}
+\begin{frame}{The reject region}
 (Explicit example in practical)
 \includegraphics[width=1\textwidth]{rejectregion}
 The blue line does not fall in the reject region. We do not reject the hypothesis that the coin is fair. If we saw 75, say, heads we would have rejected the hypothesis that the coin is fair.
@@ -167,7 +167,7 @@ The blue line does not fall in the reject region. We do not reject the hypothesi
 \end{frame}
 
 \begin{frame}
-\begin{block}{Definition, Definition, definition}
+\begin{block}{Definition, Definition, Definition}
 	
 	\begin{itemize}
 		\item Significance level or false positive rate $\alpha$: is the total probability of the test statistic falling into this region even if the null hypothesis is true.
@@ -193,7 +193,7 @@ The blue line does not fall in the reject region. We do not reject the hypothesi
 
 \end{frame}
 
-\begin{frame}{Difference between groups: The t-test}
+\begin{frame}{Differences between groups: The t-test}
 Imagine the following scenario:
 \begin{block}{Plant heights}
 	\begin{itemize}
@@ -202,7 +202,7 @@ Imagine the following scenario:
 		\item I decide to do an experiment
 		\item I take 50 plants and put them in the greenhouse; 50 remain outside
 		\item I measure their heights after $5$ days.
-		\item Did the greenhouse has a positive effect?
+		\item Did the greenhouse have a positive effect?
 	\end{itemize}
 
 \end{block}
@@ -226,13 +226,13 @@ This theory states that under the following assumptions
 \begin{block}{Assumptions of t-test}
 
 \begin{itemize}
-	\item assume the null hypothesis of equal means in both groups
-\item assume that the data are independent and are normally distribution
-\item assume the standard deviation of both groups are equal
+	\item Assume the null hypothesis of equal means in both groups
+\item Assume that the data are independent and are normally distribution
+\item Assume the standard deviation of both groups are equal
 \end{itemize}
 
 \end{block}
-Then the statistic follow a $t$-distribution with $n_1 + n_2$ degrees of freedom.
+Then the statistic follows a $t$-distribution with $n_1 + n_2$ degrees of freedom.
 \\
 (what happens if we break these assumptions?)
 \end{frame}
@@ -294,8 +294,8 @@ In this case, use the chi-squared test.
 \item Tukey's test
 \item Wald test
 \item Kolmogorov-Smirnov Test
-\item Test's for normality
-\item many non-parametric tests
+\item Tests for normality
+\item Many non-parametric tests
 \end{itemize}
 
 \end{block}
@@ -339,12 +339,12 @@ Bonferroni tells us that if we want to control the FWER at level $\alpha_{FWER}$
 \end{block}
 \end{frame}
 
-\begin{frame}{The false discovery rate }
+\begin{frame}{The False Discovery Rate }
 \begin{block}{p-value histogram}
 \begin{itemize}
-\item plot the p-value histogram
+\item Plot the p-value histogram
 \item This is simply a histogram of the computed p-values
-\item We expect a mixture distribution of two components
+\item We expect to see a mixture distribution of two components
 \item The first component corresponds to the p-values resulting from the tests for which the null hypothesis is true.
 \item The second to the p-values resulting from the tests for which the null hypothesis is not true
 \end{itemize}
@@ -355,7 +355,7 @@ Bonferroni tells us that if we want to control the FWER at level $\alpha_{FWER}$
 \includegraphics[width=1\textwidth]{pvaluehist}
 \end{frame}
 \begin{frame}{The FDR definition}
-\begin{block}{False Discovery rate}
+\begin{block}{False Discovery Rate}
 \begin{equation}
 	\text{FDR } = E\left[\frac{\text{number of false positives}}{\max(\text{Number of rejections},1)} \right]
 \end{equation}
@@ -366,7 +366,7 @@ Bonferroni tells us that if we want to control the FWER at level $\alpha_{FWER}$
 \item Reject all hypothesis $p_1,...,p_k$
 \end{enumerate}
 \end{frame}
-\begin{frame}{visualisation}
+\begin{frame}{Visualisation}
 \includegraphics[width=1\textwidth]{fdrvis}
 \end{frame}
 
@@ -394,16 +394,16 @@ Y \approx \beta_0 + \beta_1 X
 \end{frame}
 
 \begin{frame}{Estimation}
-\begin{block}{notation}
+\begin{block}{Notation}
 \begin{itemize}
-	\item coefficient are unknown need to estimate them
-\item estimates are given a hat e.g. $\hat{\beta}_0$
+	\item Coefficients are unknown, so we need to estimate them
+\item Estimates are given a hat e.g. $\hat{\beta}_0$
 \item The predicted value of $y$ at some new points $x_*$ is given as
 \begin{equation}
 \hat{y} = \hat{\beta}_0 + \hat{\beta}_1x_*
 \end{equation}
 \item We have data $(x_1,y_1),(x_2, y_2),...,(x_n,y_n)$
-\item how do we find the parameters?
+\item How do we find the parameters?
 \item Let $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1x_i$ be the prediction for $Y$ based on the $i$th value of $X$.
 \item Let $e_i = \text{True value } - \text{ predicted value} = y_i - \hat{y}_i$
 \item we call $e_i$ the $i$th residual
@@ -419,11 +419,11 @@ RSS = e^2_1 + e^2_2 + ... e^2_n
 \end{frame}
 
 \begin{frame}{Least squares}
-The least squares method choose the coefficient $\hat{\beta}_0$ and $\hat{\beta}_1$ to minimise the RSS.
+The least squares method chooses the coefficients $\hat{\beta}_0$ and $\hat{\beta}_1$ to minimise the RSS.
 \\
 This leads to
 \begin{equation}
-\hat{\beta}_1 = \frac{\sum_{n=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}
+\hat{\beta}_1 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}
 \end{equation}
 and
 \begin{equation}
@@ -435,7 +435,7 @@ where the bar denotes the sample means.
 \begin{frame}
 \includegraphics[width=1\textwidth]{linearregression}
 \end{frame}
-\begin{frame}{How good is by approximation?}
+\begin{frame}{How good is my approximation?}
 A more formal problem set-up is that our observation arise from a linear model but are then corrupted by independent noise
 \begin{equation}
 Y = \beta_0 + \beta_1X + \epsilon,
@@ -454,7 +454,7 @@ SE(\hat{\beta}_0)^2 = \sigma^2\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i = 1}^
 \end{equation}
 and
 \begin{equation}
-SE(\hat{\beta}_1)^2 =  \frac{\sigma_1^2}{\sum_{i =1 }^{n}(x_i - \bar{x})^2}
+SE(\hat{\beta}_1)^2 =  \frac{\sigma_1^2}{\sum_{i =1 }^{n}(x_i - \bar{x})^2}.
 \end{equation}
 
 \end{frame}
@@ -466,23 +466,23 @@ For linear regression, we can now compute the $95\%$ confidence interval
 \end{equation}
 We say that the the true value of $\beta_1$ has a $95 \%$ chance of falling into the interval.
 \begin{equation}
-\left[\hat{\beta}_1 - 2 SE(\hat{\beta}_1), \hat{\beta}_1 + 2 SE(\hat{\beta}_1)\right]
+\left[\hat{\beta}_1 - 2 SE(\hat{\beta}_1), \hat{\beta}_1 + 2 SE(\hat{\beta}_1)\right].
 \end{equation}
 
-\begin{alertblock}{warning}
+\begin{alertblock}{Warning}
 	The $2$ in front of the standard error means that this is only approximate. We actually need to put the $97.5\%$ quantile of a t-distribution with $n-2$ degrees of freedom (more later)
 \end{alertblock}
 
 \end{frame}
 
-\begin{frame}{linear models as a Hypothesis test}
+\begin{frame}{Linear models as a Hypothesis test}
 We might want to test the following hypothesis
 \begin{equation}
 H_0: \text{There is no relationship between } X \text{ and} Y 
 \end{equation}
 and
 \begin{equation}
-H_a: \text{There is some relationship between } X \text{ and} Y 
+H_1: \text{There is some relationship between } X \text{ and} Y 
 \end{equation}
 This is equivalent to 
 \begin{equation}
