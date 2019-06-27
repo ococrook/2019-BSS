@@ -73,6 +73,15 @@
 \item Make sound predictions
 \item Visualising raw data, visualise processed data and visualise conclusions 
 \end{itemize}
+\begin{alertblock}{References and acknowledgements}
+\begin{itemize}
+\item Much content in these slides is (unashamedly) lifted from 
+\item Modern Statistics for Modern Biology; Susan Holmes and Wolfgang Huber
+\item An Introduction to Statistical Learning; James, Witten, Hastie, Tibshirnani
+\item The Elements to Statistical Learning; Friedman, Tibshirani, Hastie
+\end{itemize}
+\end{alertblock}
+
 \end{frame}
 
 \begin{frame}{Visualisation, visualisation, visualisation}
@@ -475,7 +484,7 @@ We say that the the true value of $\beta_1$ has a $95 \%$ chance of falling into
 
 \end{frame}
 
-\begin{frame}{Linear models as a Hypothesis test}
+\begin{frame}{Linear models as a hypothesis test}
 We might want to test the following hypothesis
 \begin{equation}
 H_0: \text{There is no relationship between } X \text{ and} Y 
@@ -499,14 +508,14 @@ As we've seen before we need to see whether our estimate $\hat{\beta}_1$ is suff
 \begin{equation}
 t = \frac{\hat{\beta}_1 - 0 }{SE(\hat{\beta}_1)}
 \end{equation}
-(This is our good old friend the t-statistics).
+(This is our good old friend the t-statistic).
 \\
 \begin{block}
 	
 \begin{itemize}
 \item If there really is no relationship between $X$ and $Y$, then the above statistics has a t-distribution with $n - 2$ degrees of freedom.
 \item You can then calculate the p-value (using pt in R).
-\item Intuitively we are concerned about whether the magnitude of the coefficients are much bigger than the standard error.
+\item Intuitively, we are concerned about whether the magnitude of the coefficients are much bigger than the standard error.
 \end{itemize}
 \end{block}
 \end{frame}
@@ -532,8 +541,8 @@ How good is our model of the data?
 \end{frame}
 
 \begin{frame}{Multiple Regression}
-We have only worked with one predictor but in reality we have more than 1 predictor. For example, the height of plant is a function of both amount of sun and amount of water (and whether or not nutrients were added etc)
-\begin{exampleblock}{multiple regression}
+We have only worked with one predictor but in reality we may have more than 1 predictor. For example, the height of plant is a function of both amount of sun and amount of water (and whether or not nutrients were added etc)
+\begin{exampleblock}{Multiple regression}
 \begin{itemize}
 \item Suppose we have $p$ possible predictors (variables that may effect our outcome)
 \begin{equation}
@@ -546,7 +555,7 @@ Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_p X_p + \epsilon
 
 \begin{frame}{Multiple Regression questions}
 
-\begin{exampleblock}{multiple regression questions}
+\begin{exampleblock}{Multiple regression questions}
 	
 	\begin{itemize}
 \item Is at least one predictor useful for predicting the response?
@@ -576,12 +585,12 @@ against
 \begin{equation}
 H_a: \text{ at least one of $\beta_j$ is non-zero}
 \end{equation}
-We need a more complicated test statistics. We compute
+We need a more complicated test statistic. We compute
 \begin{equation}
 F = \frac{(\text{TSS - RSS})/p}{RSS/(n - p - 1)}
 \end{equation}
 large values of $F$ indicate evidence against the null. But what about p-values?
-unsurprisingly, the F-statistic follows the F-distribution (pf in R)
+Unsurprisingly, the F-statistic follows the F-distribution (pf in R)
 \end{block}
 \begin{alertblock}{warning}
  Why didn't wee test each variable separately using the t-statistic?
@@ -590,7 +599,7 @@ unsurprisingly, the F-statistic follows the F-distribution (pf in R)
 
 \begin{frame}{Linear models with factors}
 Up until this point we have only considered linear models with quantitative variables. We can also include factors, such as treated or untreated, male or female, Human or mouse etc.
-\begin{exampleblock}{factors}
+\begin{exampleblock}{Factors}
 
 Consider plant height with treatment or no treatment of fungicide 
 \\
@@ -646,7 +655,7 @@ What if we think that the two treatments together my have an additional \textit{
 
 \begin{frame}{Further Models}
 To cover sufficient breadth, we missed out some important topics.
-\begin{exampleblock}{linear models are linear in the parameters}
+\begin{exampleblock}{Linear models are linear in the parameters}
 	The following is a linear model, even though there is a non-linear transformation of the predictors
 \begin{equation}
 	y_i = \beta_0 + \beta_1x_{i1}^2 + \beta_2 \sin(x_{i
@@ -673,8 +682,8 @@ To cover sufficient breadth, we missed out some important topics.
 \begin{frame}{Dimensionality Reduction}
 \begin{block}{Aims}
 \begin{itemize}
-\item Visualise high-dimensional data
-\item Reduce high-dimensional data into a more manageable size
+\item Visualise high-dimensional data.
+\item Reduce high-dimensional data into a more manageable size.
 \item Understanding the variation in the data.
 \end{itemize}
 \end{block}
@@ -683,7 +692,7 @@ To cover sufficient breadth, we missed out some important topics.
 \begin{itemize}
 \item Are we applying the correct dimensionality reduction tool?
 \item Yes, it looks nice ... but is it useful?
-\item Visualisations should tell you something about the data, not what you'd like to data to show you 
+\item Visualisations should tell you something about the data, not what you would like to data to show you. 
 \end{itemize}
 \end{alertblock}
 
@@ -731,7 +740,7 @@ z_{i1} = \phi_{11}x_{i1} + \phi_{21}x_{i2} + ... + \phi_{p1} x_{ip}
 	\end{itemize}
 \end{exampleblock}
 
-\begin{alertblock}{batch Effects}
+\begin{alertblock}{Batch Effects}
 If a large proportion of variance is explained by an experimental day, machine type etc - you have a batch effect. (More later). These can often be found using PCA.
 \end{alertblock}
 
@@ -743,11 +752,11 @@ If a large proportion of variance is explained by an experimental day, machine t
 \begin{exampleblock}{Aims}
 	
 	\begin{itemize}
-\item Dimensionality reduction applied to contingency tables
-\item Uses the chi-squared distance
+\item Dimensionality reduction applied to contingency tables.
+\item Uses the chi-squared distance.
 \item As with PCA can be used to explain variability.
-\item I won't go into the mathematics here
-\item Many other dimensionality reduction tools
+\item I won't go into the mathematics here.
+\item Many other dimensionality reduction tools.
 \end{itemize}
 \end{exampleblock}
 \end{frame}
@@ -778,7 +787,7 @@ If a large proportion of variance is explained by an experimental day, machine t
 
 \begin{frame}{K-nearest neighbours}
 
-One of the simplest classification algorithms, is the k-nearest neighbours (KNN). It is a non-parametric approach.
+One of the simplest classification algorithms, is the K-nearest neighbours (KNN). It is a non-parametric approach.
 \begin{exampleblock}{KNN}
 	
 	\begin{itemize}
@@ -806,7 +815,7 @@ One of the simplest classification algorithms, is the k-nearest neighbours (KNN)
 
 \end{frame}
 
-\begin{frame}{How to choose $K$}
+\begin{frame}{How do we choose $K$?}
 As we've seen different choice of $K$ can lead to different answers.
 \begin{exampleblock}{Cross-validation}
 	
@@ -817,7 +826,7 @@ As we've seen different choice of $K$ can lead to different answers.
 		\item We split the training data (the data with labels) into random partitions
 		\item Apply K-NN algorithm for different choices of $K$. E.g. $1,3,5,7,9,11$
 		\item Compute the test error of each $K$
-		\item repeat on different random partitions
+		\item Repeat on different random partitions
 		\item Choose the $K$ that minimises the average test error across random test partitions
 		\item (Generally applicable method)
 	\end{itemize}
@@ -845,8 +854,8 @@ As we've seen different choice of $K$ can lead to different answers.
 		\begin{equation}
 		\log\left(\frac{Pr(Y = 1|X)}{1 - Pr(Y = 1|X)}\right) = \beta_0 + \beta_1 X
 		\end{equation}
-		\item Regression coefficients are fitted with a method call maximum likelihood
-		\item This is a general method for fitting model by maximising the probability of the model given the data.
+		\item Regression coefficients are fitted with a method called maximum likelihood
+		\item This is a general method for fitting a model by maximising the probability of the model given the data.
 	\end{itemize}
 	
 \end{exampleblock}
@@ -861,16 +870,16 @@ As we've seen different choice of $K$ can lead to different answers.
 
 \begin{frame}{Is the variable useful for predicting the response?}
 
-\begin{exampleblock}
+\begin{exampleblock}{Hypothesis Test}
 
 \begin{itemize}
-	\item We want a hypothesis test $H_0: \beta_1 = 0$
-	\item Compute the $z$-statistic (which is normally distribution)
+	\item We want a hypothesis test $H_0: \beta_1 = 0$.
+	\item Compute the $z$-statistic (which is normally distribution).
 	\begin{equation}
 	z = \frac{\hat{\beta}_1}{SE(\hat{\beta}_1)}
 	\end{equation}
-	\item Then compute p-values from the normal distribution
-	\item Logistic regression can be extended in the same way as we say for linear regression
+	\item Then compute p-values from the normal distribution.
+	\item Logistic regression can be extended in the same way as we did for linear regression to include multiple predictors
 \end{itemize}
 
 \end{exampleblock}
@@ -895,7 +904,7 @@ As we've seen different choice of $K$ can lead to different answers.
 \end{frame}
 
 \begin{frame}{$K$-means}
-	\begin{exampleblock}
+	\begin{exampleblock}{The K-means algorithm}
 		
 		\begin{itemize}
 		\item K-means is an iterative method
@@ -941,7 +950,7 @@ As we've seen different choice of $K$ can lead to different answers.
 \begin{exampleblock}{Distances}
 	
 	\begin{itemize}
-\item single linkage computes the distance between clusters as the smallest distance between any two points in the two clusters
+\item Single linkage computes the distance between clusters as the smallest distance between any two points in the two clusters
 \begin{equation}
 d_{12} = \min_{i \in C_1, j \in C_2} d_{ij}
 \end{equation}
