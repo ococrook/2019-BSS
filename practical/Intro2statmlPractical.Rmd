@@ -13,7 +13,7 @@ An Introduction to Statistical Learning; James, Witten, Hastie, Tibshirnani
 
 The Elements to Statistical Learning; Friedman, Tibshirani, Hastie
 
-# Section: Testing
+# Testing
 
 ## Is my coin biased?
 
@@ -280,7 +280,7 @@ Question
 If we want to use all predictors in the data frame we just put a point, as follows.
 
 ```{r,}
-lm.fit <- lm(medv~., data = Boston)
+lm.fit <- lm(medv~. , data = Boston)
 summary (lm.fit)
 ```
 
@@ -289,4 +289,100 @@ A minus sign can be use to indicate NOT to use that predictor.
 lm.fit <- lm(medv ~.-age, data = Boston)
 ```
 
+## Iteraction terms
+
+The syntax to include interaction terms is the following `lstat*age`. The `*` automatrically
+include the terms `lstat` and `age` by default.
+
+```{r,}
+lm.iteract <- lm(medv ~ lstat * age ,data = Boston)
+summary(lm.iteract)
+
+```
+
+Question
+
+20) Is the iteraction term useful?
+
+21) What can use deduce from the output about these predictors?
+
+22) Look at other iteraction terms? What other predictors have significant interactions?
+
+## Non-linear transformations of the predictors
+
+Recall that linear models are *linear in the parameters*. We are allowed to perform
+non-linear transformation of the predictors as follows. The `I()` is used to preserve
+standard syntax in R.
+
+```{r,}
+lm.nl <- lm(medv ~ lstat + I(lstat^2), data = Boston)
+summary(lm.nl)
+```
+
+Question:
+
+21) Try some different transformations of the predictors.
+
+## Comparing a linear and non-linear model 
+
+```{r}
+lm.linear <-  lm(medv ~ lstat, data = Boston)
+lm.nl <- lm(medv ~ lstat + I(lstat^2), data = Boston)
+res.anova <- anova(lm.linear, lm.nl)
+res.anova
+```
+
+Model 1 represents the linear submodel containing only one predictor,
+`lstat`, while Model 2 corresponds to the larger quadratic model that has two
+predictors, `lstat` and `lstat^2`. The anova() function performs a hypothesis
+test comparing the two models. The null hypothesis is that the two models
+fit the data equally well, and the alternative hypothesis is that the full
+model is superior. Here the `F-statistic` is 135 and the associated p-value is
+virtually zero. This provides very clear evidence that the model containing
+the predictors `lstat` and `lstat^2` is superior to the model that only
+contains the predictor `lstat`. This is not surprising, since earlier we saw
+evidence for non-linearity in the relationship between medv and lstat.
+
+
+```{r,}
+par(mfrow=c(2,2))
+plot(lm.nl)
+```
+
+## Using factors in a linear model
+
+In this section, we explore using factors in a model
+
+```{r,}
+data("Carseats")
+names(Carseats)
+```
+
+
+```{r,}
+lm.factor <- lm(Sales~. +Income*Advertising + Price*Age ,data = Carseats )
+summary(lm.factor)
+```
+Questions:
+
+22) Which iteractions are significant?
+
+23) Can you explain what the code above mean (write out the model on some paper)?
+
+24) Create some diagnostic plots and visualisations.
+
+25) Which variabes are factors?
+
+26) Create some more models with interaction terms.
+
+The `contrasts` function extrats the coding that was used for the factors.
+
+```{r,}
+contrasts(Carseats$ShelveLoc)
+```
+
+The package `limma` uses similar notation but uses more advanced techniques
+such as empirical Bayes to improve robustness.
+
+# Dimensionality Reduction
 
