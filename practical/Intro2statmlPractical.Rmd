@@ -2,8 +2,8 @@
 title: "Introduction to Statistics and Machine Learning"
 date: "27 June 2019"
 author:
-- name: oliver M. Crook
-  affiliation: MRC Biostatics Unity, Cambridge, UK
+- name: Oliver M. Crook
+  affiliation: MRC Biostatistics Unit, Cambridge, UK
 abstract: >
  This practical gives a hands on introduction to many of 
  the statistical and machine learning tools used
@@ -277,8 +277,8 @@ plot(lm.fit)
 ## Multiple regression
 
 The synatax `lm(y~x1+x2+x3)` is used for multiple linear regression where we
-are regressing on predictors `x1`, `x2`, `x3` etc. The following example uses lstat
-and age to fit a model
+are regressing on predictors `x1`, `x2`, `x3` etc. The following example uses `lstat`
+and `age` to fit a model.
 
 ```{r,}
 lm.fit <- lm(medv ~ lstat + age , data = Boston )
@@ -298,15 +298,16 @@ lm.fit <- lm(medv~. , data = Boston)
 summary (lm.fit)
 ```
 
-A minus sign can be use to indicate NOT to use that predictor.
+A minus sign can be use to indicate NOT to use that predictor (it does not do a negative
+transformation).
 ```{r,}
 lm.fit <- lm(medv ~.-age, data = Boston)
 ```
 
 ## Iteraction terms
 
-The syntax to include interaction terms is the following `lstat*age`. The `*` automatrically
-include the terms `lstat` and `age` by default.
+The syntax to include interaction terms is the following `lstat*age`. The `*` automatically
+includes the terms `lstat` and `age` as predictors by default.
 
 ```{r,}
 lm.iteract <- lm(medv ~ lstat * age ,data = Boston)
@@ -318,9 +319,9 @@ Question
 
 20) Is the iteraction term useful?
 
-21) What can use deduce from the output about these predictors?
+21) What can you deduce from the output about these predictors?
 
-22) Look at other iteraction terms? What other predictors have significant interactions?
+22) Look at other iteraction terms, what other predictors have significant interactions?
 
 ## Non-linear transformations of the predictors
 
@@ -346,7 +347,7 @@ res.anova <- anova(lm.linear, lm.nl)
 res.anova
 ```
 
-Model 1 represents the linear submodel containing only one predictor,
+Model 1 represents the linear sub-model containing only one predictor,
 `lstat`, while Model 2 corresponds to the larger quadratic model that has two
 predictors, `lstat` and `lstat^2`. The anova() function performs a hypothesis
 test comparing the two models. The null hypothesis is that the two models
@@ -389,14 +390,238 @@ Questions:
 
 26) Create some more models with interaction terms.
 
-The `contrasts` function extrats the coding that was used for the factors.
+The `contrasts` function extracts the coding that was used for the factors.
 
 ```{r,}
 contrasts(Carseats$ShelveLoc)
 ```
 
 The package `limma` uses similar notation but uses more advanced techniques
-such as empirical Bayes to improve robustness.
+such as empirical Bayes to improve robustness. These are covered in further
+praticals.
 
 # Dimensionality Reduction
+
+## Principal Components Analysis
+
+We demonstrate principial components analysis using data from US states, which is available in base R.
+
+```{r,}
+states <- row.names(USArrests)
+states
+```
+
+```{r,}
+names(USArrests)
+```
+
+First, looking at the variable means shows that they have very different means.
+```{r,}
+colMeans(USArrests)
+```
+
+The same is true of the variance of the variables
+
+```{r,}
+apply(USArrests, 2, var)
+```
+
+We use the `prcomp` function to perform PCA. Scaling of the variances is performed by default.
+
+```{r,}
+pr.out <- prcomp(USArrests, scale = TRUE)
+```
+
+Let us carefully examine the output of PCA
+```{r,}
+names(pr.out)
+```
+
+Question:
+
+27) What are the center and scale variables in the output?
+
+The rotations output provides the princpal component (PC) loadings.
+
+```{r,}
+pr.out$rotation
+```
+
+Question:
+
+28) Why are there 4 PCs?
+
+The prcomp function does not require us to compute the scores manually 
+from the loadings. They are stored in `x`
+
+```{r,}
+head(pr.out$x)
+```
+
+Let us plot the first two PCs. We use the biplot function and the base plot function
+to demonstrate the differences.
+
+```{r, fig.width=5}
+biplot(pr.out, scale = 0)
+```
+
+```{r,}
+plot(pr.out$x, pch = 19, col = "blue")
+```
+
+
+Unfortunatly, biplot produces a square plot by default. This is, in general, incorrect - the aspect of the plot should be rectangular in proportion to the variances explained.
+
+The variance explained by each component is computed from the standard deviations
+
+```{r,}
+pr.var <- pr.out$sdev ^2
+barplot(pr.var, ylab = "Variance", xlab = "PC")
+```
+
+The proportion of variance explain can also be easily computed
+
+```{r,}
+pve <- pr.var/sum(pr.var)
+barplot(pve , xlab= "Principal Component", ylab = "Proportion of Variance Explained ", ylim = c(0, 1), col = "darkgreen")
+barplot(cumsum(pve), xlab="Principal Component ", ylab = "Cumulative Proportion of Variance Explained ", ylim = c(0, 1), col = "blue")
+```
+
+
+Questions:
+
+29) Use the `princomp` function to perform pca, carefully look at the difference (and defaults!)
+
+30) Using `prcomp` perform pca on the observations rather than the variables by transposing the data matrix.
+
+31) Produce a biplot of this data - what do you notice?
+
+## Correspondance Analysis
+
+We demonstrate correspondance Analysis using the Hair and eye colour dataset
+
+```{r,}
+maleEyeHair <- HairEyeColor[, , 1]
+maleEyeHair
+```
+
+Load the `ca` package
+```{r,}
+library(ca)
+```
+The following code chunk performs correspondance analysis.
+```{r,}
+ca.fit <- ca(maleEyeHair)
+```
+
+The followin produces the correspondance analysis plot
+```{r,}
+plot(ca.fit, mass = TRUE, contrib = "absolute", map = "rowgreen", arrows = c(FALSE, TRUE))
+```
+
+Questions:
+
+32) Change some of the choices above - what does each argument do?
+
+33) Repeat the ca for female eye colour.
+
+34) Perform a chi-squared test on the eye colour dataset. How does this match up with the visualisation 
+in the plot?
+
+# Classification
+
+## The k-neareest neighbours method
+
+We use the library `class` and the Smarket dataset. We make predictions on the stock market data by using data from 2001-2004 to then predict for the year 2005.
+
+```{r,}
+library(class)
+data("Smarket")
+```
+
+Create a vector that indicates the years before 2005.
+```{r,}
+train <- (Smarket$Year < 2005)
+```
+
+We use cbind, which is short for column bind to put Lag1 and Lag2 data together and split the data into a training and testing dataset. Note the ! mean not; that is, !train is the opposite of train.
+```{r,}
+train.X <- cbind(Smarket$Lag1 , Smarket$Lag2)[train, ]
+test.X <- cbind(Smarket$Lag1, Smarket$Lag2)[!train ,]
+train.Direction <- Smarket$Direction[train]
+Direction.2005 <- Smarket$Direction [!train]
+```
+
+The k-nearest neighbour algorithm doesn't need a two-stage model fitting process.
+One ot learn the parameters and one to predict. It just predicts. We shall try to
+predict whether the stock market goes up or down in 2005, at first using $1$ neighbour.
+
+```{r,}
+knn.pred <- knn(train.X, test.X,train.Direction , k=1)
+table(knn.pred , Direction.2005)
+Direction.2005
+```
+We now compute how many predictions are correct
+```{r,}
+(43 + 83)/252
+```
+
+Questions:
+
+35) Repeat the above for different choice of k? What happens?
+
+36) (hard) Can you implement cross-validation to choose k?
+
+
+## logistic Regression
+
+Next we try to predict the direction of the stock market using logistic regression.
+The syntax of a generalised linear model `glm()` is the same as for `lm`. However,
+we need to tell `R` which model to use. In the case of logistic regression, we
+need to specify a binomial family with logit link (hence the name logistic regression.)
+
+```{r,}
+glm.fit <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume, data = Smarket, family = binomial(link = "logit") )
+summary(glm.fit)
+```
+
+Questions:
+
+37) Extract the coefficients?
+
+38) Which coefficients seem most useful for prediction?
+
+39) Using the p-values make a prediction about how well the logistic regression model will predict?
+
+To make a prediction we can use the predict function in `R`. The method outputs
+the probability that the the answer is $1$. Using `contrasts` decided whether
+$1$ corresponds to up or down in the market.
+
+```{r,}
+glm.probs <- predict(glm.fit, type = "response")
+glm.probs[1:10]
+```
+
+To covert these probabilities to predictions we threshold at $0.5$.
+```{r,}
+glm.pred <- rep("Down" , 1250)
+glm.pred[glm.probs > 0.5] <- "Up"
+```
+
+To see how well the classification see whether the predictions correspond to 
+the true answers.
+
+```{r,}
+table(glm.pred, Smarket$Direction )
+```
+
+Question:
+
+40) As was done K-NN predict the accuracy of the method.
+
+41) How well does the answer match your prediction for 39)
+
+42) What does the subset argument do in the glm?
+
+43) Using subset, fit the model only on the training data and test only on the data not used for training.
 
