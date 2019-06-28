@@ -530,7 +530,7 @@ in the plot?
 
 # Classification
 
-## The k-neareest neighbours method
+## The k-nearest neighbours method
 
 We use the library `class` and the Smarket dataset. We make predictions on the stock market data by using data from 2001-2004 to then predict for the year 2005.
 
@@ -547,17 +547,17 @@ train <- (Smarket$Year < 2005)
 We use cbind, which is short for column bind to put Lag1 and Lag2 data together and split the data into a training and testing dataset. Note the ! mean not; that is, !train is the opposite of train.
 ```{r,}
 train.X <- cbind(Smarket$Lag1 , Smarket$Lag2)[train, ]
-test.X <- cbind(Smarket$Lag1, Smarket$Lag2)[!train ,]
+test.X <- cbind(Smarket$Lag1, Smarket$Lag2)[!train, ]
 train.Direction <- Smarket$Direction[train]
 Direction.2005 <- Smarket$Direction [!train]
 ```
 
 The k-nearest neighbour algorithm doesn't need a two-stage model fitting process.
-One ot learn the parameters and one to predict. It just predicts. We shall try to
+By this we mean one to learn the parameters and one to predict. It just predicts. We shall try to
 predict whether the stock market goes up or down in 2005, at first using $1$ neighbour.
 
 ```{r,}
-knn.pred <- knn(train.X, test.X,train.Direction , k=1)
+knn.pred <- knn(train.X, test.X,train.Direction , k = 1)
 table(knn.pred , Direction.2005)
 Direction.2005
 ```
@@ -573,7 +573,7 @@ Questions:
 36) (hard) Can you implement cross-validation to choose k?
 
 
-## logistic Regression
+## Logistic Regression
 
 Next we try to predict the direction of the stock market using logistic regression.
 The syntax of a generalised linear model `glm()` is the same as for `lm`. However,
@@ -587,7 +587,7 @@ summary(glm.fit)
 
 Questions:
 
-37) Extract the coefficients?
+37) Extract the coefficients, what do they tell you?
 
 38) Which coefficients seem most useful for prediction?
 
@@ -617,11 +617,134 @@ table(glm.pred, Smarket$Direction )
 
 Question:
 
-40) As was done K-NN predict the accuracy of the method.
+40) As was done K-NN compute the accuracy of the method.
 
 41) How well does the answer match your prediction for 39)
 
 42) What does the subset argument do in the glm?
 
 43) Using subset, fit the model only on the training data and test only on the data not used for training.
+
+# Clustering
+
+## The K-means algorithm
+
+The `kmeans` function implements the kmeans method in `R`. We simulate some data
+for which we know there are two clusters and we apply kmeans to these data.
+
+```{r,}
+set.seed(2)
+x <- matrix(rnorm (50 * 2), ncol = 2)
+x[1:25, 1] <- x[1:25, 1] + 3
+x[1:25, 2] <- x[1:25, 2] - 4
+```
+
+We now apply the kmeans algorithm.
+
+```{r,}
+km.out <- kmeans(x, 2, nstart = 20)
+```
+
+We see that the clustering recovers the original simulation
+
+```{r,}
+km.out$cluster
+```
+
+The following plot visualises the data and clustering.
+```{r,}
+plot(x, col=(km.out$cluster +1), main="K-Means Clustering Results with K = 2", xlab="", ylab="", pch=20, cex=2)
+```
+
+Questions:
+
+44) Try kmeans with different values of k
+
+45) How does the within sum of squares change for different values of K?
+
+46) Apply kmeans to either your own dataset or a dataset in this workbook.
+
+
+## Hierarchical clustering
+
+The `hclust` function performs hierarchical clustering in R. An example is the 
+following, which uses complete linkage
+
+```{r,}
+hc.complete = hclust(dist(x), method = "complete")
+```
+
+Question:
+
+47) By changing the argument for method perform single and average linkage clustering
+
+The plot function allows you to view the dendrograms
+
+```{r,}
+plot(hc.complete, main="Complete Linkage ", xlab="", sub="", cex=.9)
+```
+
+Question:
+
+48) Plot the dendrograms for single and average linkage.
+
+49) What are the difference between the methods?
+
+To compute a clustering, we cut the tree. This is performed using the following code
+
+```{r,}
+cutree(hc.complete , 2)
+```
+
+Question:
+
+50) Cut the single and average linkage trees?
+
+51) What is the effect of changing the numb of groups?
+
+52) Test hierarchical clustering on your favourite dataset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
