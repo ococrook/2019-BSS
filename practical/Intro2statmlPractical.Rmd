@@ -1,8 +1,18 @@
 ---
 title: "Introduction to Statistics and Machine Learning"
-author: "Oliver M. Crook"
 date: "27 June 2019"
-output: html_document
+author:
+- name: oliver M. Crook
+  affiliation: MRC Biostatics Unity, Cambridge, UK
+abstract: >
+ This practical gives a hands on introduction to many of 
+ the statistical and machine learning tools used
+ by bioinformaticians. It serves as an introduction
+ and many more advanced topics are omitted. Correction
+ of mistakes and typos is appreciated.
+output:
+  BiocStyle::html_document:
+   toc_float: true
 ---
 
 Many of these example have been taken and adapted from 
@@ -42,10 +52,12 @@ numHeads = sum(coinFlips == "H")
 binomDensity = tibble(k = k,
      p = dbinom(k, size = numFlips, prob = 0.5))
 ```
+
 Questions: 
+
 1) Write some code to check that the probabilties from the binomial statistic sum to $1$.
 
-2) change the prob argument show that the probabilities still some to $1$.
+2) Change the `prob` argument and show that the probabilities still sum to $1$.
 
 
 The following code chunk plots the binomial statistic and the number of heads observed is marked in blue.
@@ -60,10 +72,11 @@ ggplot(binomDensity) +
 
 Question:
 
-3) Change the prob argument above and replot the binomial statistic, what do you notice about how the distribution is centered?
+3) Change the prob argument above and re-plot the binomial statistic, what do you notice about how the distribution is centered?
 
 
-Now, we set the size of the reject threshold
+Now, we set the size of the reject threshold, this is a choice an corresponds to how many false discoveries we are
+happy to allow.
 ```{r,}
 alpha = 0.05
 ```
@@ -109,7 +122,7 @@ ggplot(binomDensity) +
 
 Questions:
 
-8) Is there evidence that are coin is biased?
+8) Is there evidence that our coin is biased?
 
 9) Change the size of the reject region to a smaller value, what is our conclusion now?
 
@@ -204,7 +217,7 @@ Question
 
 # Linear Models
 
-This section discusses linear models. There are many different software packages to work with in R, we will start with some simple examples.
+This section discusses linear models. There are many different software packages to work with in R, we start with some simple examples.
 
 
 Load libraries require for this section.
@@ -221,7 +234,8 @@ names(Boston)
 ```
 In R, the formula syntax is the following `lm(y~x,data)`. The first part specifies 
 the formula of the model (an intercept is included by default) and then the variables
-to regress on. We create a simple linear model with the median values as a reponse
+to regress on. The second part tells the linear model which data to use.
+We create a simple linear model with the median values as a reponse
 and the percent of households with low socioeconomic status (lstat) as a predictor.
 
 ```{r,}
@@ -243,7 +257,7 @@ Question
 
 We can predict for new values of `lstat`, along with confidence intervals using `predict`
 ```{r,}
-predict (lm.fit ,data.frame(lstat=(c(5,10 ,15))), interval = "confidence")
+predict(lm.fit ,data.frame(lstat=(c(5,10 ,15))), interval = "confidence")
 ```
 
 Let us visualise the results of the linear modelling. What is happening?
@@ -253,7 +267,7 @@ plot(Boston$lstat, Boston$mdev, pch = 19)
 abline (lm.fit ,lwd=3,col ="red")
 ```
 
-Plotting the lm object results in a diagnostic plots.
+Plotting the lm object results in diagnostic plots.
 
 ```{r,}
 par(mfrow=c(2,2))
