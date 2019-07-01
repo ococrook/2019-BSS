@@ -27,7 +27,7 @@ The Elements to Statistical Learning; Friedman, Tibshirani, Hastie
 
 ## Is my coin biased?
 
-The following code chunk simualtes 10 coin toss from a biased coin.
+The following code chunk simulates 100 coin toss from a biased coin.
 
 ```{r,}
 set.seed(2) # sets a random seed

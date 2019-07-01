@@ -303,7 +303,7 @@ div.tocify {
 <h1><span class="header-section-number">1</span> Testing</h1>
 <div id="is-my-coin-biased" class="section level2">
 <h2><span class="header-section-number">1.1</span> Is my coin biased?</h2>
-<p>The following code chunk simualtes 10 coin toss from a biased coin.</p>
+<p>The following code chunk simulates 100 coin toss from a biased coin.</p>
 <pre class="r"><code>set.seed(2) # sets a random seed
 numFlips = 100
 probHead = 0.59
@@ -975,7 +975,7 @@ glm.pred[glm.probs &gt; 0.5] &lt;- &quot;Up&quot;</code></pre>
 <h1><span class="header-section-number">5</span> Clustering</h1>
 <div id="the-k-means-algorithm" class="section level2">
 <h2><span class="header-section-number">5.1</span> The K-means algorithm</h2>
-<p>The <code>kmeans</code> function implement the kmeans method in <code>R</code>. We simulate some data for which we know there are two clusters and we apply kmeans to these data.</p>
+<p>The <code>kmeans</code> function implements the kmeans method in <code>R</code>. We simulate some data for which we know there are two clusters and we apply kmeans to these data.</p>
 <pre class="r"><code>set.seed(2)
 x &lt;- matrix(rnorm (50 * 2), ncol = 2)
 x[1:25, 1] &lt;- x[1:25, 1] + 3
@@ -998,11 +998,11 @@ x[1:25, 2] &lt;- x[1:25, 2] - 4</code></pre>
 </div>
 <div id="hierarchical-clustering" class="section level2">
 <h2><span class="header-section-number">5.2</span> Hierarchical clustering</h2>
-<p>The <code>hclust</code> function performs hierarchical clustering in R. An example is as follows that uses complete linkage</p>
+<p>The <code>hclust</code> function performs hierarchical clustering in R. An example is the following, which uses complete linkage</p>
 <pre class="r"><code>hc.complete = hclust(dist(x), method = &quot;complete&quot;)</code></pre>
 <p>Question:</p>
 <ol start="47" style="list-style-type: decimal">
-<li>By changing the arguement for method perform single and average linkage clustering</li>
+<li>By changing the argument for method perform single and average linkage clustering</li>
 </ol>
 <p>The plot function allows you to view the dendrograms</p>
 <pre class="r"><code>plot(hc.complete, main=&quot;Complete Linkage &quot;, xlab=&quot;&quot;, sub=&quot;&quot;, cex=.9)</code></pre>
@@ -1020,7 +1020,7 @@ x[1:25, 2] &lt;- x[1:25, 2] - 4</code></pre>
 <ol start="50" style="list-style-type: decimal">
 <li><p>Cut the single and average linkage trees?</p></li>
 <li><p>What is the effect of changing the numb of groups?</p></li>
-<li><p>Test hierarhical clustering on your favourite dataset</p></li>
+<li><p>Test hierarchical clustering on your favourite dataset</p></li>
 </ol>
 </div>
 </div>
