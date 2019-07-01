@@ -92,11 +92,15 @@ Question:
 
 
 Solution:
+<details>
 ```{r,}
 orderBinomDenisty <- arrange(binomDensity, p)
 orderBinomDenisty[1,] # most unlikely
 orderBinomDenisty[101,] 
 ```
+</details>
+
+
 Question:
 
 7) What does the following code chunk do?
@@ -157,9 +161,12 @@ Question:
 
 
 Solution
+<details>
 ```{r,}
 t.test(PlantGrowth$weight[PlantGrowth$group == "ctrl"], PlantGrowth$weight[PlantGrowth$group == "trt1"], var.equal = TRUE)
 ```
+</details>
+
 Questions:
 
 11) What is the p-value?

@@ -353,7 +353,7 @@ ggplot(binomDensity) +
 <li><p>Looking at the output, what is the most unlikely number of heads to observe?</p></li>
 <li><p>Looking at the output, what is the most likely number of heads to observe?</p></li>
 </ol>
-<p>Solution:</p>
+<p>Solution: <details></p>
 <pre class="r"><code>orderBinomDenisty &lt;- arrange(binomDensity, p)
 orderBinomDenisty[1,] # most unlikely</code></pre>
 <pre><code>## # A tibble: 1 x 2
@@ -365,6 +365,7 @@ orderBinomDenisty[1,] # most unlikely</code></pre>
 ##       k      p
 ##   &lt;int&gt;  &lt;dbl&gt;
 ## 1    50 0.0796</code></pre>
+<p></details></p>
 <p>Question:</p>
 <ol start="7" style="list-style-type: decimal">
 <li>What does the following code chunk do?</li>
@@ -420,7 +421,7 @@ ggplot(PlantGrowth, aes(y = weight, x = group, col = group, size = 4, alpha = 0.
 <ol start="10" style="list-style-type: decimal">
 <li>Using a t-test, check to see whether the difference in means of the ctrl and treatment 1 are different</li>
 </ol>
-<p>Solution</p>
+<p>Solution <details></p>
 <pre class="r"><code>t.test(PlantGrowth$weight[PlantGrowth$group == &quot;ctrl&quot;], PlantGrowth$weight[PlantGrowth$group == &quot;trt1&quot;], var.equal = TRUE)</code></pre>
 <pre><code>## 
 ##  Two Sample t-test
@@ -433,6 +434,7 @@ ggplot(PlantGrowth, aes(y = weight, x = group, col = group, size = 4, alpha = 0.
 ## sample estimates:
 ## mean of x mean of y 
 ##     5.032     4.661</code></pre>
+<p></details></p>
 <p>Questions:</p>
 <ol start="11" style="list-style-type: decimal">
 <li><p>What is the p-value?</p></li>
