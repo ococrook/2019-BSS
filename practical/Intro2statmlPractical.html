@@ -345,11 +345,11 @@ ggplot(binomDensity) +
 <ol start="3" style="list-style-type: decimal">
 <li>Change the prob argument above and re-plot the binomial statistic, what do you notice about how the distribution is centered?</li>
 </ol>
-<p>Now, we set the size of the reject threshold, this is a choice an corresponds to how many false discoveries we are happy to allow.</p>
+<p>Now, we set the size of the reject threshold, this is a choice and corresponds to how many false discoveries we are happy to allow.</p>
 <pre class="r"><code>alpha = 0.05</code></pre>
 <p>Question:</p>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Without looking below use the arrange function from dplyr to order the probabilities, smallest first.</p></li>
+<li><p>Without looking below use the arrange function from <code>dplyr</code> to order the probabilities, smallest first.</p></li>
 <li><p>Looking at the output, what is the most unlikely number of heads to observe?</p></li>
 <li><p>Looking at the output, what is the most likely number of heads to observe?</p></li>
 </ol>
@@ -872,10 +872,10 @@ data(&quot;Smarket&quot;)</code></pre>
 <pre class="r"><code>train.X &lt;- cbind(Smarket$Lag1 , Smarket$Lag2)[train, ]
 test.X &lt;- cbind(Smarket$Lag1, Smarket$Lag2)[!train, ]
 train.Direction &lt;- Smarket$Direction[train]
-Direction.2005 &lt;- Smarket$Direction [!train]</code></pre>
+Direction.2005 &lt;- Smarket$Direction[!train]</code></pre>
 <p>The k-nearest neighbour algorithm doesn’t need a two-stage model fitting process. By this we mean one to learn the parameters and one to predict. It just predicts. We shall try to predict whether the stock market goes up or down in 2005, at first using <span class="math inline">\(1\)</span> neighbour.</p>
-<pre class="r"><code>knn.pred &lt;- knn(train.X, test.X,train.Direction , k = 1)
-table(knn.pred , Direction.2005)</code></pre>
+<pre class="r"><code>knn.pred &lt;- knn(train.X, test.X, train.Direction , k = 1)
+table(knn.pred, Direction.2005)</code></pre>
 <pre><code>##         Direction.2005
 ## knn.pred Down Up
 ##     Down   43 58

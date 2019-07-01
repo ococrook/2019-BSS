@@ -75,7 +75,7 @@ Question:
 3) Change the prob argument above and re-plot the binomial statistic, what do you notice about how the distribution is centered?
 
 
-Now, we set the size of the reject threshold, this is a choice an corresponds to how many false discoveries we are
+Now, we set the size of the reject threshold, this is a choice and corresponds to how many false discoveries we are
 happy to allow.
 ```{r,}
 alpha = 0.05
@@ -83,7 +83,7 @@ alpha = 0.05
 
 Question:
 
-4) Without looking below use the arrange function from dplyr to order the probabilities, smallest first.
+4) Without looking below use the arrange function from `dplyr` to order the probabilities, smallest first.
 
 5) Looking at the output, what is the most unlikely number of heads to observe?
 
@@ -549,7 +549,7 @@ We use cbind, which is short for column bind to put Lag1 and Lag2 data together 
 train.X <- cbind(Smarket$Lag1 , Smarket$Lag2)[train, ]
 test.X <- cbind(Smarket$Lag1, Smarket$Lag2)[!train, ]
 train.Direction <- Smarket$Direction[train]
-Direction.2005 <- Smarket$Direction [!train]
+Direction.2005 <- Smarket$Direction[!train]
 ```
 
 The k-nearest neighbour algorithm doesn't need a two-stage model fitting process.
@@ -557,8 +557,8 @@ By this we mean one to learn the parameters and one to predict. It just predicts
 predict whether the stock market goes up or down in 2005, at first using $1$ neighbour.
 
 ```{r,}
-knn.pred <- knn(train.X, test.X,train.Direction , k = 1)
-table(knn.pred , Direction.2005)
+knn.pred <- knn(train.X, test.X, train.Direction , k = 1)
+table(knn.pred, Direction.2005)
 Direction.2005
 ```
 We now compute how many predictions are correct
