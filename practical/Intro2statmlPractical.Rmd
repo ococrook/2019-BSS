@@ -270,8 +270,8 @@ predict(lm.fit ,data.frame(lstat=(c(5,10 ,15))), interval = "confidence")
 Let us visualise the results of the linear modelling. What is happening?
 
 ```{r,}
-plot(Boston$lstat, Boston$mdev, pch = 19)
-abline (lm.fit ,lwd=3,col ="red")
+plot(Boston$lstat, Boston$medv, pch = 19)
+abline(lm.fit ,lwd=3,col ="red")
 ```
 
 Plotting the lm object results in diagnostic plots.
